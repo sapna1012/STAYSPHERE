@@ -1,0 +1,283 @@
+
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+  rel="stylesheet"
+/>
+
+<!-- Leaflet CSS -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
+<style>
+  body {
+    font-family: "Poppins", sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+  }
+
+  h3,
+  h4 {
+    font-weight: 600;
+    color: #222;
+  }
+
+  .listing-card {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background: #fff;
+  }
+
+  .listing-card .card-body {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .show-img {
+    max-height: 350px;
+    object-fit: cover;
+    border-bottom: 2px solid #eee;
+  }
+
+  #map {
+    height: 400px;
+    width: 100%;
+    border-radius: 12px;
+    margin: 15px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .btns {
+    margin: 20px 0;
+    text-align: center;
+  }
+
+  .btn-dark,
+  .btn-outline-dark {
+    border-radius: 30px;
+    padding: 8px 18px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+
+  .card-title {
+    font-weight: 600;
+    font-size: 16px;
+    color: #444;
+  }
+
+  .card-text {
+    font-size: 14px;
+    color: #555;
+  }
+
+  .review-section {
+    margin-top: 30px;
+  }
+
+  .review-section h4 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #222;
+  }
+
+  textarea.form-control {
+    border-radius: 10px;
+    resize: none;
+  }
+
+  .review-card {
+    border: 1px solid #eee;
+    border-radius: 12px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Leaflet popup custom style */
+  .leaflet-popup-content-wrapper {
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .leaflet-popup-content {
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+  }
+</style>
+
+<% layout("/layouts/boilerplate") %>
+<div class="row mt-3">
+  <div class="col-8 offset-3">
+    <h3><%= listing.title %></h3>
+  </div>
+
+  <div class="card col-6 offset-3 show-card listing-card">
+    <img
+      src="<%= listing.image.url %>"
+      class="card-img-top show-img"
+      alt="listing_image"
+    />
+    <div class="card-body">
+      <p class="card-text">Owned by: <i><%= listing.owner.username %></i></p>
+      <p class="card-text"><%= listing.description %></p>
+      <p class="card-text">
+        &#8377; <%= listing.price.toLocaleString("en-IN") %>
+      </p>
+      <p class="card-text"><%= listing.location %></p>
+      <p class="card-text"><%= listing.country %></p>
+    </div>
+
+    <!-- 🗺️ Map Section -->
+    <div class="col-10 offset-1">
+      <h4>Where you’ll be</h4>
+      <div id="map"></div>
+    </div>
+
+    <!-- Edit/Delete Buttons -->
+    <% if (currUser && listing.owner._id.equals(currUser._id)) { %>
+    <div class="btns">
+      <a
+        href="/listings/<%= listing._id %>/edit"
+        class="btn btn-dark col-2 offset-3"
+        >Edit</a
+      >
+      <br />
+      <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+        <button class="btn btn-dark offset-5">Delete</button>
+      </form>
+    </div>
+    <% } %>
+
+    <!-- Review Section -->
+    <div class="col-8 offset-3 review-section">
+      <hr />
+      <% if (currUser) { %>
+      <h4>Leave a Review</h4>
+      <form
+        method="POST"
+        action="/listings/<%= listing._id %>/reviews"
+        novalidate
+        class="needs-validation"
+      >
+        <div class="mb-3 mt-3">
+          <label for="rating" class="form-label">Rating</label>
+          <fieldset class="starability-slot">
+            <input
+              type="radio"
+              id="no-rate"
+              class="input-no-rate"
+              name="review[rating]"
+              value="0"
+              checked
+              aria-label="No rating"
+            />
+            <input type="radio" id="rate1" name="review[rating]" value="1" />
+            <label for="rate1" title="Terrible"></label>
+            <input type="radio" id="rate2" name="review[rating]" value="2" />
+            <label for="rate2" title="Not good"></label>
+            <input type="radio" id="rate3" name="review[rating]" value="3" />
+            <label for="rate3" title="Average"></label>
+            <input type="radio" id="rate4" name="review[rating]" value="4" />
+            <label for="rate4" title="Very good"></label>
+            <input type="radio" id="rate5" name="review[rating]" value="5" />
+            <label for="rate5" title="Amazing"></label>
+          </fieldset>
+        </div>
+
+        <div class="mb-3 mt-3">
+          <label for="comment" class="form-label">Comments</label>
+          <textarea
+            name="review[comment]"
+            id="comment"
+            cols="30"
+            rows="5"
+            class="form-control"
+            required
+          ></textarea>
+          <div class="invalid-feedback">
+            Please add some comments for review
+          </div>
+        </div>
+
+        <button class="btn btn-outline-dark">Submit</button>
+      </form>
+      <hr />
+      <% } %>
+
+      <p><b>All Reviews</b></p>
+      <div class="row">
+        <% for (let review of listing.reviews) { %>
+        <div class="card col-5 ms-3 mb-3 review-card">
+          <div class="card-body">
+            <h5 class="card-title">@<%= review.author.username%></h5>
+            <p class="card-text">
+              <span
+                class="starability-result"
+                data-rating="<%= review.rating %>"
+              ></span>
+            </p>
+
+            <p class="card-text"><%= review.comment %></p>
+
+            <% if (currUser && review.author &&
+            review.author._id.equals(currUser._id)) { %>
+            <form
+              class="mb-3"
+              method="POST"
+              action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+            >
+              <button class="btn btn-sm btn-dark">Delete</button>
+            </form>
+            <% } %>
+          </div>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const location = "<%= listing.location %>, <%= listing.country %>";
+
+    // Initialize map
+    var map = L.map("map").setView([20, 0], 2);
+
+    // Add OpenStreetMap tiles
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "&copy; OpenStreetMap contributors",
+    }).addTo(map);
+
+    // Geocode with Nominatim
+    fetch(
+      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+        location
+      )}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.length > 0) {
+          var lat = data[0].lat;
+          var lon = data[0].lon;
+
+          map.setView([lat, lon], 12);
+
+          var marker = L.marker([lat, lon]).addTo(map);
+          marker
+            .bindPopup(`<b><%= listing.title %></b><br>${location}`)
+            .openPopup();
+        } else {
+          console.log("Location not found:", location);
+        }
+      })
+      .catch((err) => console.error("Geocoding error:", err));
+  });
+</script>

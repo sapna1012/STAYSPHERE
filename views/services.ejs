@@ -1,0 +1,142 @@
+<% layout("layouts/boilerplate") %>
+
+<style>
+  .services-header {
+    background: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')
+                no-repeat center center;
+    background-size: cover;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+  }
+
+  .services-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
+  }
+
+  .service-card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+  }
+
+  .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+  }
+
+  .service-card img {
+  width: 100%;
+  height: 220px;   /* fixed height */
+  object-fit: cover; /* ensures image doesn’t stretch */
+}
+
+
+  .service-card-body {
+    padding: 20px;
+  }
+
+  .service-card-body h5 {
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #0d6efd;
+  }
+
+  .service-card-body p {
+    font-size: 0.95rem;
+    color: #6c757d;
+  }
+</style>
+
+<!-- Header Section -->
+<header class="services-header">
+  <div>
+    <h1>Our Services</h1>
+    <p class="lead fw-bold">Enhance your stay with professional lifestyle services</p>
+  </div>
+</header>
+
+<!-- Services Grid -->
+<section class="container py-5">
+  <div class="row g-4">
+
+    <!-- Photography -->
+    <div class="col-md-4">
+      <div class="service-card shadow-sm">
+        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="Photography">
+        <div class="service-card-body">
+          <h5>Photography</h5>
+          <p>Capture your travel memories with professional photographers at your stay or destination.</p>
+        </div>
+      </div>
+    </div>
+
+
+<!-- Prepared Meals -->
+<div class="col-md-4">
+  <div class="service-card shadow-sm">
+    <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=900&q=80" 
+         alt="Prepared Meals" class="img-fluid">
+    <div class="service-card-body">
+      <h5>Prepared Meals</h5>
+      <p>Enjoy healthy and freshly prepared meals delivered to your doorstep during your stay.</p>
+    </div>
+  </div>
+</div>
+
+
+ <!-- Makeup & Styling -->
+<div class="col-md-4">
+  <div class="service-card shadow-sm">
+    <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=900&q=80" 
+          alt="Makeup & Styling">
+    <div class="service-card-body">
+      <h5>Makeup & Styling</h5>
+      <p>Look your best with expert makeup artists and stylists available on-demand.</p>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Catering -->
+    <div class="col-md-4">
+      <div class="service-card shadow-sm">
+        <img src="https://images.unsplash.com/photo-1543353071-873f17a7a088?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="Catering">
+        <div class="service-card-body">
+          <h5>Catering Services</h5>
+          <p>Enjoy delicious meals tailored to your taste by professional catering providers.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Private Chefs -->
+    <div class="col-md-4">
+      <div class="service-card shadow-sm">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="Private Chef">
+        <div class="service-card-body">
+          <h5>Private Chefs</h5>
+          <p>Hire a private chef to cook local and international cuisines right at your stay.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fitness & Gyms -->
+    <div class="col-md-4">
+      <div class="service-card shadow-sm">
+        <img src="https://images.unsplash.com/photo-1558611848-73f7eb4001a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="Gyms">
+        <div class="service-card-body">
+          <h5>Fitness & Gyms</h5>
+          <p>Stay fit with access to gyms, yoga trainers, and fitness experts during your travels.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

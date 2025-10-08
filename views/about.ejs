@@ -1,0 +1,98 @@
+<% layout("layouts/boilerplate") %>
+
+<style>
+ .about-header {
+  background: url('https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') 
+              no-repeat center center;
+  background-size: cover;
+  height: 70vh;
+  color: black; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+  .about-header h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #212529; 
+    text-shadow: none; 
+  }
+
+  .about-header p {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #343a40; 
+  }
+
+  .icon-box {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .icon-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  }
+
+  .icon-box i {
+    font-size: 2.5rem;
+    color: #0d6efd;
+    margin-bottom: 15px;
+  }
+</style>
+
+<!-- Header Section -->
+<header class="about-header">
+  <div>
+    <h1>About StaySphere</h1>
+    <p class="lead"><b>Connecting travelers with unique stays and unforgettable experiences.</b></p>
+  </div>
+</header>
+
+<!-- About Content -->
+<section class="container py-5">
+  <div class="row mb-5">
+    <div class="col-12"> <!-- Full width instead of col-md-6 -->
+      <h2 class="fw-bold mb-3">Who We Are</h2>
+      <p class="text-muted fs-5">
+        StaySphere is a modern platform inspired by Airbnb, built to connect people who want to explore 
+        the world with hosts who provide unique homes, services, and experiences.  
+        Our mission is to make travel more personal, affordable, and memorable.  
+      </p>
+      <p class="text-muted fs-5">
+        Whether you are planning a weekend getaway, seeking cultural adventures, or hosting travelers, 
+        StaySphere helps you do it all with ease, trust, and comfort.
+      </p>
+    </div>
+  </div>
+
+  <!-- Mission / Vision / Values -->
+  <div class="row text-center g-4">
+    <div class="col-md-4">
+      <div class="icon-box">
+        <i class="fa-solid fa-bullseye"></i>
+        <h5 class="fw-bold">Our Mission</h5>
+        <p class="text-muted">To bring people together by making travel more accessible, authentic, and enjoyable.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="icon-box">
+        <i class="fa-solid fa-eye"></i>
+        <h5 class="fw-bold">Our Vision</h5>
+        <p class="text-muted">A world where every stay feels like home and every trip becomes an unforgettable story.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="icon-box">
+        <i class="fa-solid fa-handshake"></i>
+        <h5 class="fw-bold">Our Values</h5>
+        <p class="text-muted">Trust, diversity, and hospitality form the heart of everything we do.</p>
+      </div>
+    </div>
+  </div>
+</section>

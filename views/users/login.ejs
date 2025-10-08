@@ -1,0 +1,90 @@
+<% layout("layouts/boilerplate") %>
+
+<style>
+  body {
+    background: #f8f9fa; /* Light gray background */
+  }
+  .login-card {
+    border-radius: 1rem;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    background: #fff;
+  }
+</style>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card login-card p-4">
+        <h2 class="text-center mb-4 fw-bold">Welcome Back</h2>
+        <p class="text-center text-muted mb-4">Login to your account</p>
+
+        <form action="/login" method="POST" class="needs-validation" novalidate>
+          
+          <!-- Username -->
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input
+              name="username"
+              id="username"
+              type="text"
+              class="form-control rounded-3"
+              placeholder="Enter your username"
+              required
+            />
+            <div class="invalid-feedback">Please enter your username.</div>
+          </div>
+
+          <!-- Password -->
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              name="password"
+              id="password"
+              type="password"
+              class="form-control rounded-3"
+              placeholder="Enter your password"
+              required
+            />
+            <div class="invalid-feedback">Please enter your password.</div>
+          </div>
+
+          <!-- Remember me -->
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="remember" name="remember">
+            <label class="form-check-label" for="remember">Remember me</label>
+          </div>
+
+          <!-- Login Button -->
+          <div class="d-grid">
+            <button class="btn btn-primary btn-lg rounded-3">Login</button>
+          </div>
+        </form>
+
+        <!-- Links -->
+        <p class="text-center mt-3 mb-0">
+          Don’t have an account? <a href="/signup">Sign Up</a>
+        </p>
+        <p class="text-center mt-1">
+          <a href="/forgot-password" class="text-muted small">Forgot Password?</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Bootstrap validation
+(() => {
+  'use strict';
+  const forms = document.querySelectorAll('.needs-validation');
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  });
+})();
+</script>
