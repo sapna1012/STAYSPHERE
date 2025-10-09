@@ -90,6 +90,9 @@ const sessionOptions = {
 //   res.send("Hi, I am root");
 // });
 
+app.get("/", (req, res) => {
+  res.render("home");   // make sure you have views/home.ejs
+});
 
 app.use(session(sessionOptions));
 app.use(flash());
