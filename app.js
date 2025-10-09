@@ -90,9 +90,6 @@ const sessionOptions = {
 //   res.send("Hi, I am root");
 // });
 
-app.get("/", (req, res) => {
-  res.render("home");   // make sure you have views/home.ejs
-});
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -135,6 +132,10 @@ const validateListing = (req, res, next) => {
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/",userRouter);
+
+app.get("/", (req, res) => {
+  res.redirect("/listings");
+});
 
 // About Page Route
 app.get("/about", (req, res) => {
